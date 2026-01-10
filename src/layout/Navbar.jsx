@@ -8,7 +8,6 @@ const navLinks = [
   { href: "#projects", label: "Publications" },
   { href: "#experience", label: "Experience" },
   { href: "#certificates", label: "Certificates" },
-  { href: "#contact", label: "Contact" },
 ];
 
 export const Navbar = () => {
@@ -56,7 +55,16 @@ export const Navbar = () => {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <Button size="sm">Contact Me</Button>
+          <Button
+  size="sm"
+  onClick={() => {
+    const element = document.getElementById("contact");
+    element?.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+  Contact Me
+</Button>
+
         </div>
 
         {/* Mobile Menu Button */}
@@ -83,9 +91,19 @@ export const Navbar = () => {
               </a>
             ))}
 
-            <Button onClick={() => setIsMobileMenuOpen(false)}>
-              Contact Me
-            </Button>
+            <Button
+  onClick={() => {
+    // Close the mobile menu
+    setIsMobileMenuOpen(false);
+
+    // Scroll to the contact section smoothly
+    const element = document.getElementById("contact");
+    element?.scrollIntoView({ behavior: "smooth" });
+  }}
+>
+  Contact Me
+</Button>
+
           </div>
         </div>
       )}
