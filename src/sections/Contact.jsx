@@ -1,21 +1,17 @@
 import {
   Mail,
-  Phone,
   MapPin,
   Send,
-  CheckCircle,
-  AlertCircle,
 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { useState } from "react";
-import emailjs from "@emailjs/browser";
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "tayyaba.farhat31@gmail.com",
-    href: "mailto:tayyaba.farhat31@gmail.com",
+    value: "munirabdulwasay@gmail.com", // <-- Updated to your email
+    href: "mailto:munirabdulwasay@gmail.com",
   },
   {
     icon: MapPin,
@@ -43,26 +39,30 @@ export const Contact = () => {
     setSubmitStatus({ type: null, message: "" });
 
     try {
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+      // Prepare form data for Web3Forms
+      const formBody = new FormData();
+      formBody.append("access_key", "f4d6dc3f-af91-47ac-9b0d-e1fef1d768ff"); // Your Web3Forms API key
+      formBody.append("name", formData.name);
+      formBody.append("email", formData.email);
+      formBody.append("message", formData.message);
+      formBody.append("subject", "New Contact Form Submission");
 
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        },
-        publicKey
-      );
-
-      setSubmitStatus({
-        type: "success",
-        message: "Message sent successfully! I'll get back to you soon.",
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formBody,
       });
-      setFormData({ name: "", email: "", message: "" });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSubmitStatus({
+          type: "success",
+          message: "Message sent successfully! I'll get back to you soon.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error("Failed to send form");
+      }
     } catch (error) {
       setSubmitStatus({
         type: "error",
