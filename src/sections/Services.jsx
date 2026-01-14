@@ -5,44 +5,58 @@ import {
   GraduationCap,
   Briefcase,
   Palette,
+  ArrowRight,
 } from "lucide-react";
+import { Button } from "@/components/Button";
 
 const services = [
   {
     icon: Brain,
-    title: "AI & Data Science Consultancy",
+    title: "AI & Machine Learning Consulting",
     description:
-      "Providing expert guidance to organizations, researchers, and startups in designing and implementing AI-driven solutions that solve real-world problems.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Startup & Innovation Advisory",
-    description:
-      "Helping early-stage startups with AI strategy, product validation, and scalable system architecture to transform ideas into intelligent products.",
+      "Providing strategic guidance on applying artificial intelligence and machine learning to real-world business and research challenges, from problem formulation to solution design.",
   },
   {
     icon: Network,
-    title: "Agentic AI Solutions",
+    title: "Deep Learning & Advanced AI Solutions",
     description:
-      "Designing and solving complex problems related to autonomous AI agents, multi-agent systems, reasoning pipelines, and decision-making architectures.",
+      "Designing and implementing advanced deep learning models, including neural networks, transformers, and intelligent systems for complex data-driven tasks.",
   },
   {
-    icon: Briefcase,
-    title: "AI System Architecture",
+    icon: Lightbulb,
+    title: "Custom AI Product Development",
     description:
-      "Designing end-to-end AI architectures including data pipelines, model training workflows, deployment strategies, and scalable ML systems.",
+      "Building tailored AI-powered products from concept to deployment, ensuring scalability, performance, and alignment with business objectives.",
   },
   {
     icon: GraduationCap,
-    title: "Education & Mentorship",
+    title: "AI Research & Innovation Services",
     description:
-      "Offering academic guidance in Artificial Intelligence, Machine Learning, Deep Learning, research methodology, and project supervision.",
+      "Supporting academic and industrial research through experimental design, model development, evaluation, and publication-oriented AI innovation.",
+  },
+  {
+    icon: Briefcase,
+    title: "AI Startup & Product Strategy Consulting",
+    description:
+      "Advising startups and product teams on AI-driven strategy, MVP development, feasibility analysis, and long-term product scalability.",
   },
   {
     icon: Palette,
-    title: "Design & Intelligent Applications",
+    title: "AI-Powered Web & Mobile Solutions",
     description:
-      "Contributing to design-oriented and AI-powered projects including intelligent dashboards, AI interfaces, and human-centered systems.",
+      "Developing intelligent web and mobile applications that integrate AI capabilities, delivering data-driven, user-centric digital experiences.",
+  },
+  {
+    icon: Brain,
+    title: "Model Deployment, MLOps & AI Integration",
+    description:
+      "Deploying, monitoring, and maintaining AI models in production environments with robust MLOps pipelines and seamless system integration.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Training, Mentorship & AI Enablement",
+    description:
+      "Providing structured training, mentorship, and skill development programs in AI, machine learning, and deep learning for students and professionals.",
   },
 ];
 
@@ -58,28 +72,27 @@ export const Services = () => {
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase animate-fade-in">
+          <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
             Services
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 animate-fade-in animation-delay-100 text-secondary-foreground">
+          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground">
             What I{" "}
             <span className="font-serif italic font-normal text-white">
               Offer
             </span>
           </h2>
-          <p className="text-muted-foreground animate-fade-in animation-delay-200">
+          <p className="text-muted-foreground">
             Specialized services combining research, innovation, and practical
             AI solutions to support academia, startups, and industry.
           </p>
         </div>
 
         {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
           {services.map((service, index) => (
             <div
               key={index}
-              className="glass p-8 rounded-3xl border border-primary/30 hover:border-primary/50 transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="glass p-8 rounded-3xl border border-primary/30 hover:border-primary/50 transition-all duration-300"
             >
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                 <service.icon className="w-6 h-6 text-primary" />
@@ -88,11 +101,31 @@ export const Services = () => {
               <h3 className="text-xl font-semibold mb-3">
                 {service.title}
               </h3>
+
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {service.description}
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Request for Services Button */}
+        <div className="flex justify-center">
+          <Button
+            size="lg"
+            onClick={() => {
+              const contactSection =
+                document.getElementById("contact");
+              if (contactSection) {
+                contactSection.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }
+            }}
+            className="flex items-center gap-2"
+          >
+            Request for Services <ArrowRight className="w-5 h-5" />
+          </Button>
         </div>
       </div>
     </section>

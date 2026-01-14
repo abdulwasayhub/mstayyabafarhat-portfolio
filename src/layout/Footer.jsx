@@ -8,9 +8,10 @@ const socialLinks = [
 
 const footerLinks = [
   { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#services", label: "Services" },
+  { href: "#research", label: "Research" },
+  { href: "#work", label: "Work" },
+  { href: "#certificates", label: "Certificates" },
 ];
 
 export const Footer = () => {

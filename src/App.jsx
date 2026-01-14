@@ -3,6 +3,8 @@ import { Hero } from "@/sections/Hero";
 import { About } from "@/sections/About";
 import { Services } from "@/sections/Services";
 import { Projects } from "@/sections/Projects";
+import { Skills } from "@/sections/Skills"; 
+import { Endorsements } from "@/sections/Endorsements"; // <-- NEW
 import { Experience } from "@/sections/Experience";
 import { Testimonials } from "@/sections/Testimonials";
 import { Contact } from "@/sections/Contact";
@@ -16,6 +18,8 @@ function App() {
         <Hero />
         <About />
         <Services />   {/* Services added here */}
+        <Skills />         {/* Skills section */}
+        <Endorsements />   {/* Endorsements added here */}
         <Projects />
         <Experience />
         <Testimonials />

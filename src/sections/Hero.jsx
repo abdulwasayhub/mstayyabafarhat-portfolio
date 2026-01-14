@@ -100,17 +100,7 @@ export const Hero = () => {
 >
   Contact Me <ArrowRight className="w-5 h-5" />
 </Button>
-              <AnimatedBorderButton
-  onClick={() => {
-    const experienceSection = document.getElementById("experience");
-    if (experienceSection) {
-      experienceSection.scrollIntoView({ behavior: "smooth" });
-    }
-  }}
->
-  <Download className="w-5 h-5" />
-  Experience
-</AnimatedBorderButton>
+           
 
 
             </div>
@@ -119,11 +109,13 @@ export const Hero = () => {
             <div className="flex items-center gap-4 animate-fade-in animation-delay-400">
               <span className="text-sm text-muted-foreground">Connect:</span>
               <a
-                href="#"
-                className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
+  href="https://www.linkedin.com/in/tayyaba-farhat/"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="p-2 rounded-full glass hover:bg-primary/10 hover:text-primary transition-all duration-300"
+>
+  <Linkedin className="w-5 h-5" />
+</a>
             </div>
           </div>
 

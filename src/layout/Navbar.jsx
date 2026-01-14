@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
-  { href: "#projects", label: "Publications" },
-  { href: "#experience", label: "Experience" },
+  { href: "#skills", label: "Skills" },          // <-- Added Skills
+  { href: "#research", label: "Research" },
+  { href: "#work", label: "Work" },
   { href: "#certificates", label: "Certificates" },
+  { href: "#endorsements", label: "Endorsements" },
 ];
 
 export const Navbar = () => {
@@ -62,7 +64,7 @@ export const Navbar = () => {
     element?.scrollIntoView({ behavior: "smooth" });
   }}
 >
-  Contact Me
+  Reach Out
 </Button>
 
         </div>
