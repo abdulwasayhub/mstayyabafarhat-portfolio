@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
+/* ================= THEME ================= */
 @theme {
   --color-background: #0f1418;
   --color-foreground: #f0f2f5;
-
   --color-card: #141a1f;
 
   --color-primary: #20b2a6;
@@ -16,20 +16,16 @@
   --color-muted-foreground: #7a8491;
 
   --color-border: #242b32;
-
   --radius: 0.75rem;
 
   --color-highlight: #f5a623;
   --color-surface: #1a2329;
 }
 
+/* ================= BASE ================= */
 @layer base {
   html {
     scroll-behavior: smooth;
-  }
-
-  button {
-    cursor: pointer;
   }
 
   body {
@@ -43,37 +39,33 @@
   }
 }
 
+/* ================= COMPONENTS ================= */
 @layer components {
   .glass {
-    background-color: color-mix(in srgb, var(--color-surface) 50%, transparent);
+    background-color: color-mix(in srgb, var(--color-surface) 55%, transparent);
     backdrop-filter: blur(16px);
     border: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
   }
 
-  .glass-strong {
-    background-color: color-mix(in srgb, var(--color-surface) 80%, transparent);
-    backdrop-filter: blur(24px);
-    border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
-  }
-
   .glow-text {
-    text-shadow: 0 0 30px
-      color-mix(in srgb, var(--color-primary) 50%, transparent);
+    text-shadow: 0 0 25px
+      color-mix(in srgb, var(--color-primary) 55%, transparent);
   }
 
   .glow-border {
-    box-shadow: 0 0 20px
-        color-mix(in srgb, var(--color-primary) 20%, transparent),
-      inset 0 0 20px color-mix(in srgb, var(--color-primary) 5%, transparent);
+    box-shadow:
+      0 0 25px color-mix(in srgb, var(--color-primary) 25%, transparent),
+      inset 0 0 20px color-mix(in srgb, var(--color-primary) 8%, transparent);
   }
 }
 
+/* ================= ANIMATIONS ================= */
 @layer utilities {
-  @keyframes fade-in {
+  @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(20px);
-      filter: blur(10px);
+      transform: translateY(24px);
+      filter: blur(6px);
     }
     to {
       opacity: 1;
@@ -83,42 +75,23 @@
   }
 
   @keyframes slow-drift {
-    0%,
-    100% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(20px, -30px);
-    }
-    50% {
-      transform: translate(-15px, -20px);
-    }
-    75% {
-      transform: translate(30px, 10px);
-    }
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, -20px); }
   }
 
   @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 
   @keyframes marquee {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
+  /* Utilities */
   .animate-fade-in {
-    animation: fade-in 0.8s ease-out both;
+    animation: fade-in-up 0.9s ease-out both;
   }
 
   .animate-float {
@@ -126,59 +99,95 @@
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 32s linear infinite;
   }
 
-  .animation-delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
-
-  .animation-delay-500 {
-    animation-delay: 500ms;
-  }
-
-  .animation-delay-600 {
-    animation-delay: 600ms;
-  }
-
-  .animation-delay-800 {
-    animation-delay: 800ms;
-  }
-
-  @keyframes animated-border {
-    0% {
-      stroke-dashoffset: 400;
-    }
-    100% {
-      stroke-dashoffset: -550;
-    }
-  }
-
-  .group:hover .animated-border-path {
-    animation: animated-border 1.5s linear infinite;
-  }
-
-  .animated-border:hover {
-    background-color: color-mix(in srgb, #26c4b8 15%, transparent);
-    backdrop-filter: blur(16px);
-    box-shadow: 0 0 20px color-mix(in srgb, #26c4b8 20%, transparent);
-  }
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
 
   .timeline-glow {
-    box-shadow: 0 0 40px
-        color-mix(in srgb, var(--color-primary) 35%, transparent),
-      0 0 80px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    box-shadow:
+      0 0 40px color-mix(in srgb, var(--color-primary) 35%, transparent),
+      0 0 90px color-mix(in srgb, var(--color-primary) 20%, transparent);
   }
+}
+
+/* ================= WIPE TEXT ================= */
+@keyframes wipe {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.wipe-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.wipe-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(32,178,166,.35),
+    rgba(32,178,166,.1),
+    rgba(32,178,166,.35)
+  );
+  animation: wipe 1.4s ease forwards;
+  z-index: 2;
+}
+
+.wipe-text {
+  opacity: 0;
+  animation: fade-in-up .6s ease forwards;
+  animation-delay: .7s;
+}
+/* ================= REVEAL ================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .8s ease, transform .8s ease;
+  will-change: transform, opacity;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================= MICRO INTERACTIONS ================= */
+.hover-lift {
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 45px rgba(0,0,0,.25);
+}
+
+.icon-hover {
+  transition: transform .3s ease;
+}
+
+.group:hover .icon-hover {
+  transform: rotate(8deg) scale(1.1);
+}
+
+/* ================= THEME SWITCH ================= */
+:root {
+  --bg: #0f1418;
+  --fg: #f0f2f5;
+}
+
+.light {
+  --bg: #f8fafc;
+  --fg: #0f172a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  transition: background .35s ease, color .35s ease;
 }

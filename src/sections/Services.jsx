@@ -1,3 +1,4 @@
+// Services.jsx
 import {
   Brain,
   Lightbulb,
@@ -7,6 +8,7 @@ import {
   Palette,
   ArrowRight,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/Button";
 
 const services = [
@@ -14,64 +16,96 @@ const services = [
     icon: Brain,
     title: "AI & Machine Learning Consulting",
     description:
-      "Providing strategic guidance on applying artificial intelligence and machine learning to real-world business and research challenges, from problem formulation to solution design.",
+      "Providing strategic guidance on applying artificial intelligence and machine learning to real-world business and research challenges.",
   },
   {
     icon: Network,
     title: "Deep Learning & Advanced AI Solutions",
     description:
-      "Designing and implementing advanced deep learning models, including neural networks, transformers, and intelligent systems for complex data-driven tasks.",
+      "Designing and implementing advanced deep learning models including neural networks and transformers.",
   },
   {
     icon: Lightbulb,
     title: "Custom AI Product Development",
     description:
-      "Building tailored AI-powered products from concept to deployment, ensuring scalability, performance, and alignment with business objectives.",
+      "Building tailored AI-powered products from concept to deployment with scalability in mind.",
   },
   {
     icon: GraduationCap,
     title: "AI Research & Innovation Services",
     description:
-      "Supporting academic and industrial research through experimental design, model development, evaluation, and publication-oriented AI innovation.",
+      "Supporting academic and industrial research through experimental design and evaluation.",
   },
   {
     icon: Briefcase,
-    title: "AI Startup & Product Strategy Consulting",
+    title: "AI Startup & Product Strategy",
     description:
-      "Advising startups and product teams on AI-driven strategy, MVP development, feasibility analysis, and long-term product scalability.",
+      "Advising startups on AI-driven strategy, MVP development, and feasibility analysis.",
   },
   {
     icon: Palette,
     title: "AI-Powered Web & Mobile Solutions",
     description:
-      "Developing intelligent web and mobile applications that integrate AI capabilities, delivering data-driven, user-centric digital experiences.",
+      "Developing intelligent web and mobile apps with integrated AI capabilities.",
   },
   {
     icon: Brain,
-    title: "Model Deployment, MLOps & AI Integration",
+    title: "Model Deployment, MLOps & Integration",
     description:
-      "Deploying, monitoring, and maintaining AI models in production environments with robust MLOps pipelines and seamless system integration.",
+      "Deploying and maintaining AI models with robust MLOps pipelines.",
   },
   {
     icon: GraduationCap,
-    title: "Training, Mentorship & AI Enablement",
+    title: "Training, Mentorship & Enablement",
     description:
-      "Providing structured training, mentorship, and skill development programs in AI, machine learning, and deep learning for students and professionals.",
+      "Providing structured training and mentorship programs in AI and ML.",
   },
 ];
+
+/* ------------------ MOTION VARIANTS ------------------ */
+
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 export const Services = () => {
   return (
     <section id="services" className="py-32 relative overflow-hidden">
-      {/* Background blur */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-highlight/5 rounded-full blur-3xl" />
-      </div>
+      {/* PARALLAX BACKGROUND BLOBS */}
+      <motion.div
+        className="absolute top-1/3 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        animate={{ y: [0, -40, 0], x: [0, 30, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-highlight/5 rounded-full blur-3xl"
+        animate={{ y: [0, 30, 0], x: [0, -30, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* HEADER */}
+        <motion.div
+          className="text-center max-w-3xl mx-auto mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
             Services
           </span>
@@ -82,21 +116,36 @@ export const Services = () => {
             </span>
           </h2>
           <p className="text-muted-foreground">
-            Specialized services combining research, innovation, and practical
-            AI solutions to support academia, startups, and industry.
+            Specialized AI services combining research, innovation, and
+            production-grade engineering.
           </p>
-        </div>
+        </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
+        {/* SERVICES GRID */}
+        <motion.div
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
           {services.map((service, index) => (
-            <div
+            <motion.div
               key={index}
-              className="glass p-8 rounded-3xl border border-primary/30 hover:border-primary/50 transition-all duration-300"
+              variants={item}
+              whileHover={{
+                y: -8,
+                boxShadow: "0 30px 60px rgba(0,0,0,0.2)",
+              }}
+              className="glass p-8 rounded-3xl border border-primary/30 transition-all"
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+              <motion.div
+                className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6"
+                whileHover={{ scale: 1.15, rotate: 6 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <service.icon className="w-6 h-6 text-primary" />
-              </div>
+              </motion.div>
 
               <h3 className="text-xl font-semibold mb-3">
                 {service.title}
@@ -105,28 +154,35 @@ export const Services = () => {
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {service.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Request for Services Button */}
-        <div className="flex justify-center">
-          <Button
-            size="lg"
-            onClick={() => {
-              const contactSection =
-                document.getElementById("contact");
-              if (contactSection) {
-                contactSection.scrollIntoView({
-                  behavior: "smooth",
-                });
-              }
-            }}
-            className="flex items-center gap-2"
+        {/* MAGNETIC CTA BUTTON */}
+        <motion.div
+          className="flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <motion.div
+            whileHover={{ x: 6 }}
+            transition={{ type: "spring", stiffness: 200 }}
           >
-            Request for Services <ArrowRight className="w-5 h-5" />
-          </Button>
-        </div>
+            <Button
+              size="lg"
+              onClick={() =>
+                document
+                  .getElementById("contact")
+                  ?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="flex items-center gap-2"
+            >
+              Request for Services <ArrowRight className="w-5 h-5" />
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
