@@ -20,23 +20,18 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
-        isScrolled ? "glass-strong py-3" : "bg-transparent py-5"
-      }  z-50`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500
+                  ${isScrolled ? "glass-strong py-3" : "bg-background/90 backdrop-blur-md py-5"}`}
     >
       <nav className="container mx-auto px-6 flex items-center justify-between">
-        <a
-          href="#"
-          className="text-xl font-bold tracking-tight hover:text-primary"
-        >
+        {/* Logo */}
+        <a href="#" className="text-xl font-bold tracking-tight hover:text-primary">
           TF<span className="text-primary">.</span>
         </a>
 
@@ -47,7 +42,7 @@ export const Navbar = () => {
               <a
                 href={link.href}
                 key={index}
-                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface"
+                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-surface transition-all"
               >
                 {link.label}
               </a>
@@ -55,18 +50,16 @@ export const Navbar = () => {
           </div>
         </div>
 
-        {/* CTA Button */}
+        {/* Desktop CTA */}
         <div className="hidden md:block">
           <Button
-  size="sm"
-  onClick={() => {
-    const element = document.getElementById("contact");
-    element?.scrollIntoView({ behavior: "smooth" });
-  }}
->
-  Reach Out
-</Button>
-
+            size="sm"
+            onClick={() => {
+              document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Reach Out
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -80,32 +73,27 @@ export const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden glass-strong animate-fade-in">
+        <div className="md:hidden bg-background/95 backdrop-blur-md animate-fade-in shadow-lg">
           <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
             {navLinks.map((link, index) => (
               <a
                 href={link.href}
                 key={index}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg text-muted-foreground hover:text-foreground py-2"
+                className="text-lg text-muted-foreground hover:text-foreground py-2 transition-colors"
               >
                 {link.label}
               </a>
             ))}
 
             <Button
-  onClick={() => {
-    // Close the mobile menu
-    setIsMobileMenuOpen(false);
-
-    // Scroll to the contact section smoothly
-    const element = document.getElementById("contact");
-    element?.scrollIntoView({ behavior: "smooth" });
-  }}
->
-  Contact Me
-</Button>
-
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
+              Contact Me
+            </Button>
           </div>
         </div>
       )}
