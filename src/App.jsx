@@ -10,6 +10,7 @@ import { Experience } from "@/sections/Experience";
 import { Contact } from "@/sections/Contact";
 import { Footer } from "@/layout/Footer";
 import { CursorGlow } from "@/components/CursorGlow";
+import { Testimonials } from "./sections/Testimonials";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Endorsements />
         <Projects />
         <Experience />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />
